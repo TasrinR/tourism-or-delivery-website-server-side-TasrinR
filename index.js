@@ -43,14 +43,6 @@ async function run() {
 
     
 
-    app.get('/users/:id', async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: ObjectId(id) };
-      const user = await usersCollection.findOne(query);
-      // console.log('load user with id: ', id);
-      res.send(user);
-    })
-
     // POST API
     app.post('/orders', async (req, res) => {
       const newOrder = req.body;
@@ -63,10 +55,10 @@ async function run() {
 
     app.post('/tickets', async (req, res) => {
       const newTicket = req.body;
-      const result = await usersCollection.insertOne(newTicket);
+      const result = await ticketsCollection.insertOne(newTicket);
       console.log('got new ticket', req.body);
       console.log('added service', result);
-      res.json(result);
+      res.json(req.body);
     });
 
     // DELETE API
